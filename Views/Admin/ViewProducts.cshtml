@@ -1,0 +1,104 @@
+﻿@model List<SMOKESTYLES_ADMIN.Models.Product>
+@{
+    ViewBag.Title = "View Products";
+}
+<link href="~/css/viewProduct.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Products <small>Statistics Overview</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i><a href="/admin/index"> Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-chain"></i><a href="/admin/viewproducts"> Products</a>
+            </li>
+
+        </ol>
+    </div>
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <i class="fa fa-info-circle"></i><strong> Welcome back!</strong> Here is the all products avaialbe at your shop!
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-11">
+            <div class="panel panel-primary filterable">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Products</h3>
+                    <div class="pull-right">
+                        <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                    </div>
+                </div>
+                <table class="table table-responsive table-bordred table-striped">
+                    <thead>
+                        <tr class="filters">
+                            <th><input type="text" class="form-control" placeholder="#"></th>
+                            <th><input type="text" class="form-control" placeholder="Name"></th>
+                            <th><input type="text" class="form-control" placeholder="Product Description"></th>
+                            <th><input type="text" class="form-control" placeholder="Unit Price"></th>
+                            <th><input type="text" class="form-control" placeholder="Available Quantity"></th>
+                            <th><input type="text" class="form-control" placeholder="Date"></th>
+                            <th><input type="text" class="form-control" placeholder="Edit" disabled></th>
+                            <th><input type="text" class="form-control" placeholder="Delete" disabled></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model)
+                        {
+                            <tr>
+                                <td>@product.product_id</td>
+                                <td>@product.product_name</td>
+                                <td>@product.product_description</td>
+                                <td>@product.product_unit_price </td>
+                                <td>@product.product_quantity</td>
+                                <td>@DateTime.Now</td>
+                                <td><a href="/Admin/EditProduct/@product.product_id" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                <td><a href="/Admin/DeleteProduct/@product.product_id" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    MODAL Classes   -->
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input class="form-control " type="text" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <input class="form-control " type="text" placeholder="Unit Price">
+                </div>
+                <div class="form-group">
+                    <input class="form-control " type="text" placeholder="Quantity In Hand">
+                </div>
+                <div class="form-group">
+                    <textarea rows="2" class="form-control" placeholder="Description"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
